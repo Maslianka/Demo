@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoProgect", "ConsoleApp1\DemoProgect.csproj", "{9653DA99-97C2-4698-AAEB-72B92290D189}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FruitTest", "FruitTest\FruitTest.csproj", "{D6CAB6A7-2352-46C0-A1A7-451940F131C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9653DA99-97C2-4698-AAEB-72B92290D189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9653DA99-97C2-4698-AAEB-72B92290D189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9653DA99-97C2-4698-AAEB-72B92290D189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9653DA99-97C2-4698-AAEB-72B92290D189}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6CAB6A7-2352-46C0-A1A7-451940F131C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6CAB6A7-2352-46C0-A1A7-451940F131C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6CAB6A7-2352-46C0-A1A7-451940F131C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6CAB6A7-2352-46C0-A1A7-451940F131C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {018625DB-69DD-4A9C-8866-F6E0CA9B9EF2}
+	EndGlobalSection
+EndGlobal
