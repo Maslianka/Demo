@@ -32,21 +32,15 @@ namespace DemoProgect
             Name = Console.ReadLine();
             Console.WriteLine("Write color: ");
             Color = Console.ReadLine();
+
         }
 
-        public virtual void Input(string docAddress)
+        public virtual void Input(string[] new_fruit)
         {
-            using (StreamReader streamReader = new StreamReader(docAddress))
-            {
-                string line;
-                while ((line = streamReader.ReadLine()) != null)
-                {
-                    // Do something with the line.
-                    string[] parts = line.Split(',');
-                }
-                streamReader.Close();
-            }
+            Name = new_fruit[0];
+            Color = new_fruit[1];
         }
+
 
         public virtual string Print()
         {

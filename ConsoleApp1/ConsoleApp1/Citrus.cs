@@ -19,20 +19,32 @@ namespace DemoProgect
         {
             this.VitaminC = vitaminC;
         }
-        
 
-        public int VitaminC{ get; set; }
+        double vitaminC;
+        public double VitaminC { get; set; }
         
         public override void Input()
         {
             base.Input();
             Console.WriteLine("Write vitamin");
             VitaminC = int.Parse(Console.ReadLine());
+
+            if (!double.TryParse(Console.ReadLine(), out vitaminC))
+            {
+                throw new FormatException("Vitamin C in gramm is not double value");
+            }
+        }
+        public override void Input(string[] new_fruit)
+        {
+            Name = new_fruit[0];
+            Color = new_fruit[1];
+            vitaminC = Double.Parse(new_fruit[2]);
+
         }
 
         public override string Print()
         {            
-            return base.Print()+" vitamin "+ VitaminC+"gram";           
+            return base.Print()+", vitamin "+ VitaminC+"gram";           
         }
         public override string ToString()
         {
