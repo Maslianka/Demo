@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DemoProgect
 {
@@ -11,44 +13,68 @@ namespace DemoProgect
 //- конструктор з параметрами, 
 //- властивість, 
 //- перевизначені методи Input() та Print().
-
+    [Serializable]
     public class Citrus: Fruit
     {
         public Citrus() { }
-        public Citrus(string name, string color, int vitaminC):base(name, color)
+        public Citrus(string name, string color, double vitaminC):base(name, color)
         {
-            this.VitaminC = vitaminC;
+            this.vitaminC = vitaminC;
         }
 
         double vitaminC;
-        public double VitaminC { get; set; }
+        public double VitaminC
+        {
+            get
+            {
+                return vitaminC;
+            }
+            set
+            {
+                vitaminC = value;
+            }
+        }
         
         public override void Input()
         {
             base.Input();
             Console.WriteLine("Write vitamin");
-            VitaminC = int.Parse(Console.ReadLine());
-
-            if (!double.TryParse(Console.ReadLine(), out vitaminC))
-            {
-                throw new FormatException("Vitamin C in gramm is not double value");
-            }
+            VitaminC = Convert.ToDouble(Console.ReadLine());
+           
         }
-        public override void Input(string[] new_fruit)
+        public override void Input(string[] newFruit)
         {
-            Name = new_fruit[0];
-            Color = new_fruit[1];
-            vitaminC = Double.Parse(new_fruit[2]);
+            Name = newFruit[0];
+            Color = newFruit[1];            
+            try
+            {
+                VitaminC = Convert.ToDouble(newFruit[2].Replace(".", ","));
+            }
+            catch
+            {
+                throw new Exception("Wrong data");
+            }
 
         }
 
-        public override string Print()
-        {            
-            return base.Print()+", vitamin "+ VitaminC+"gram";           
+        public override void Print(string pathToFile)
+        {
+            using (StreamWriter streamWriter = new StreamWriter(pathToFile, true, System.Text.Encoding.Default))
+            {
+                streamWriter.WriteLine($"{Name}: {Color}: {VitaminC}");
+            }
+           
         }
+
+        public override void Print()
+        {
+            Console.WriteLine(this);           
+        }
+
+       
         public override string ToString()
         {
-            return(Print());
+            return(base.ToString() + ", vitamin " + VitaminC + " gram");
         }
 
        

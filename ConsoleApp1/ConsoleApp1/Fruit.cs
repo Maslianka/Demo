@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace DemoProgect
 {
@@ -13,7 +14,8 @@ namespace DemoProgect
     //- віртуальні методи Input() та Print(), для зчитування даних з консолі та виведення даних на консоль, а також перевантажити варіанти введення-виведення з файлу.
     //- властивості для полів, 
     //- перевизначити метод ToString(). 
-    public class Fruit:IThink
+    [XmlInclude(typeof(Citrus))]
+    public class Fruit : IComparable<Fruit>
     {      
         public Fruit(){}
 
@@ -26,6 +28,11 @@ namespace DemoProgect
         public string Name { get ; set ; }
         public string Color { get; set; }
 
+        public int CompareTo(Fruit other)
+        {
+            return this.Name.CompareTo(other.Name);
+        }
+
         public virtual void Input()
         {
             Console.WriteLine("Write name: ");
@@ -35,21 +42,29 @@ namespace DemoProgect
 
         }
 
-        public virtual void Input(string[] new_fruit)
+        public virtual void Input(string[] newFruit)
         {
-            Name = new_fruit[0];
-            Color = new_fruit[1];
+            Name = newFruit[0];
+            Color = newFruit[1];
         }
 
 
-        public virtual string Print()
+        public virtual void Print()
         {
-           return($"Name :{Name}, color: {Color}");
+            Console.WriteLine(this);
+        }
+
+        public virtual void Print(string pathToFile)
+        {
+            using (StreamWriter streamWriter = new StreamWriter(pathToFile,true, System.Text.Encoding.Default))
+            {
+                streamWriter.WriteLine($"{Name}:{Color}");
+            }
         }
 
         public override string ToString()
         {
-            return Print();
+            return $"Name: {Name}, color: {Color}";
         }
     }
 }

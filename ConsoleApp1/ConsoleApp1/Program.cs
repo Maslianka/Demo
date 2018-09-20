@@ -14,55 +14,70 @@ namespace DemoProgect
 //- Написати юніт-тести на методи класів
 
     class Program
-    {       
+    {
+        const string readFileName = "Fruits.txt";
+        const string saveFileName = "fruitsss.txt";
+        const string saveSortesFruitsByName = "SortedFruits.txt";
+        const string saveXMLFileName = "XmlSerialize.xml";
+
         static void Main(string[] args)
         {
            
-            List<Fruit> fruitList = inputFormFile();
-           
-            foreach (var s in fruitList)
+            List<Fruit> fruitList = inputFormFile(readFileName);
+            
+            foreach(var s in fruitList)
             {
-                Console.WriteLine(s);
-            }
-
-            Console.ReadLine();
-        }
-        public static List<Fruit> inputFormFile()
-        {
-            List<Fruit> list = new List<Fruit>();
-            StreamReader streamReader = new StreamReader("Fruit.txt");
-            string line;
-            try
-            {
-                while ((line = streamReader.ReadLine()) != null)
+                if (s.Color.ToLower() == " yellow")
                 {
-                    string[] cut = line.Split(',');
-                    switch (cut.Length)
-                    {
-                        case 2:
-                            Fruit f = new Fruit();
-                            f.Input(cut);
-                            list.Add(f);
-                            break;
-                        case 3:
-                            Citrus f1 = new Citrus();
-                            f1.Input(cut);
-                            list.Add(f1);
-                            break;
-
-                    }
+                    s.Print(saveFileName);
+                    s.Print();       
                 }
             }
-            catch (Exception e)
+
+            Console.WriteLine("Sorted list");
+
+            fruitList.Sort();
+            foreach (var s in fruitList)
             {
-                Console.WriteLine(e.Message);
+                s.Print(saveSortesFruitsByName);
             }
-            finally
+            Console.ReadLine();
+        }
+
+        public static void XmlSer(List<Fruit> fruits, string fileName)
+        {
+            XmlSerializer xmlFormat = new XmlSerializer(typeof(List<Fruit>));
+            using (FileStream fileStream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
             {
-                streamReader.Close();
+                xmlFormat.Serialize(fileStream, fruits);
+            }
+        }
+
+        public static List<Fruit> inputFormFile(string patch)
+        {
+            List<Fruit> list = new List<Fruit>();
+            using (StreamReader streamReader = new StreamReader(patch))
+            {
+                while (!streamReader.EndOfStream)
+                {
+                    string[] resultFruit = streamReader.ReadLine().Split(',');
+
+                    switch (resultFruit.Length)
+                    {
+                        case 2:
+                            Fruit fruit = new Fruit();
+                            list.Add(fruit);
+                            fruit.Input(resultFruit);
+                            break;
+                        case 3:
+                            Fruit citrus = new Citrus();
+                            list.Add(citrus);
+                            citrus.Input(resultFruit);
+                            break;
+                    }                    
+                }
             }
             return list;
         }
-
     }
 }
