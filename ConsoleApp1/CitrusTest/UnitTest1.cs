@@ -19,6 +19,23 @@ namespace CitrusTest
             //Accert     
             Assert.AreEqual(expected, result);
         }
+        
+        [TestMethod]
+         public void TestInitialization()
+        {
+            //Arrange
+            string expectedName = "Lemmon";
+            string expectedColor = "yellow";
+            double expectedVitamineC = 15;
+
+            //Act
+            Citrus citrus = new Citrus(expectedName, expectedColor, expectedVitamineC);
+
+            //Assert
+            Assert.AreEqual(expectedName, citrus.Name);
+            Assert.AreEqual(expectedColor, citrus.Color);
+            Assert.AreEqual(expectedVitamineC, citrus.VitamineC);
+        }
 
     }
 }
